@@ -1,0 +1,11 @@
+{% extends 'layout/base.html.twig' %}
+
+
+{# SETTINGS PAGE #}
+{% set page_title = "Book Accueil" %}
+
+
+{% block title %}{{page_title}} | {{ parent() }}{% endblock %}
+{% block body %}
+    <h1>{{page_title}}</h1>
+{% endblock %}

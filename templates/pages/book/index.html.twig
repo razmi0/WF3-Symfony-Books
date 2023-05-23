@@ -1,0 +1,47 @@
+{% extends 'layout/base.html.twig' %}
+
+{# SETTINGS PAGE #}
+{% set page_title = "Book index" %}
+
+
+{% block title %}
+	{{page_title}}
+	|
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+<style>
+.no-bullets {
+	list-style-type: none;
+}
+</style>
+
+
+	<header class="page-header">
+		<h2 class="page-title text-center">{{page_title}}</h2>
+	</header>
+	<main class="page-content">
+		<h4  class ="text-center mb-5">---- List of Books ----</h4>
+		<ul class="d-flex flex-wrap flex-row no-bullets justify-items-evenly">
+			{% for book in books %}
+				<li class="m-4 p-4">
+					<h5>Titre :
+						{{ book.title }}</h5>
+					<p>Description :
+						{{ book.description }}</p>
+					<p>Cover :
+						{{ book.cover }}</p>
+					<a href="{{url('book:index')}}" class="btn btn-outline-warning btn-sm">Back to book liste</a>
+					<a href="{{url('book:update', {id: book.id})}}" class="btn btn-outline-secondary btn-sm">Edit this book</a>
+				</li>
+			{% endfor %}
+		</ul>
+
+	</main>
+	<footer class="page-footer">
+		<a href="{{url('book:create')}}">Add a book</a>
+	</footer>
+
+{% endblock %}

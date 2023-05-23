@@ -1,0 +1,7 @@
+
+
+<a 
+    class="nav-link {{ app.request.get('_route') == route ? 'active' }}" 
+    {{ app.request.get('_route') == route ? 'aria-current="page"' }}
+    href="{{ url(route) }}"
+>{{ label }}</a>

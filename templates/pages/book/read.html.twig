@@ -1,0 +1,33 @@
+{% extends 'layout/base.html.twig' %}
+
+{# SETTINGS PAGE #}
+{% set page_title = "Book : " ~ book.title %}
+
+
+{% block title %}
+	{{page_title}}
+	|
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+	<header class="page-header">
+		<h2 class="page-title">{{page_title}}</h2>
+	</header>
+	<main class="page-content">
+		<div>
+			<h6>Titre : {{ book.title }}
+			</h6>
+			<p>Description : {{ book.description }}</p>
+			<p>Cover : {{ book.cover }}</p>
+		</div>
+
+
+	</main>
+	<footer class="page-footer">
+		<a href="{{url('book:index')}}" class="btn btn-outline-warning btn-sm">Back to book liste</a>
+		<a href="{{url('book:update', {id: book.id})}}" class="btn btn-outline-secondary btn-sm">Edit this book</a>
+	</footer>
+
+
+{% endblock %}
