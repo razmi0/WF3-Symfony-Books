@@ -70,9 +70,36 @@ class BookController extends AbstractController
         ]);
     }
     #[Route('/{id}/edit', name: 'update', methods : ["HEAD", "GET", "POST"])]
-    public function update(): Response
+    public function update(Book $book, Request $request, BookRepository $bookRepository): Response
     {
+                //Build the form sur l'architecture de Booktype(form) 
+        // et selon obj $book
+
+        $form = $this->createForm(BookType::class, $book);
+
+        //Handle the form
+        $form->handleRequest($request);
+
+        // form treatment + form validator + saving data
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $bookRepository->save($book, true);
+
+            return $this->redirectToRoute('book:read', [
+                'id' => $book->getId()
+            ]);
+
+        }
+
+
+        // create form view 
+
+        $form = $form->createView();
+
         return $this->render('pages/book/update.html.twig', [
+            'book' => $book,
+            'form' => $form
         ]);
     }
     #[Route('/{id}/delete', name: 'delete')]

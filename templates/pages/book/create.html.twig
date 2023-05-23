@@ -16,7 +16,6 @@
 {% block body %}
 
 
-
 	<header class="page-header">
 		<h2 class="page-title">{{ page_title }}</h2>
 	</header>
@@ -25,43 +24,9 @@
 		<div class="row">
 			<div class="col-md-8 offset-md-2">
 
-				{{form_start(form, {
-        'attr': {
-            'novalidate': 'novalidate'
-        }
-    })}}
-
-    {# TOKEN CSRF #}
-    {{ form_widget(form._token) }}
-
-				{# Title #}
-				<div class="form-group">
-					{{ form_label(form.title) }}
-					{{ form_widget(form.title) }}
-					{{ form_help(form.title) }}
-					{{ form_errors(form.title) }}
-				</div>
-
-				{# Description #}
-				<div class="form-group">
-					{{ form_label(form.description) }}
-					{{ form_widget(form.description) }}
-					{{ form_help(form.description) }}
-					{{ form_errors(form.description) }}
-				</div>
-
-				{# Cover #}
-				<div class="form-group">
-					{{ form_label(form.cover) }}
-					{{ form_widget(form.cover) }}
-					{{ form_help(form.cover) }}
-					{{ form_errors(form.cover) }}
-				</div>
-				<button class="btn btn-sm btn-primary" type="submit">Create the new book</button>
-
-				{{form_end(form, {
-        'render_rest' : false
-    })}}
+				{% include ("pages/book/_form.html.twig") with {
+					form: form,
+				} only %}
 
 			</div>
 		</div>
