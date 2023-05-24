@@ -1,0 +1,33 @@
+{% extends 'layout/base.html.twig' %}
+
+{# SETTINGS PAGE #}
+{% set page_title = "Author : " ~ author.firstname ~ author.lastname %}
+
+
+{% block title %}
+	{{page_title}}
+	|
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+	<header class="page-header">
+		<h2 class="page-title">{{page_title}}</h2>
+	</header>
+	<main class="page-content">
+		<div>
+			<h5>Firstname :
+				{{ author.firstname }}</h5>
+			<p>Lastname :
+				{{ author.lastname }}</p>
+		</div>
+
+
+	</main>
+	<footer class="page-footer">
+		<a href="{{url('author:index')}}" class="btn btn-outline-warning btn-sm">Back to author liste</a>
+		<a href="{{url('author:update', {id: author.id})}}" class="btn btn-outline-secondary btn-sm">Edit this book</a>
+	</footer>
+
+
+{% endblock %}

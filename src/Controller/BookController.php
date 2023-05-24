@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/book', name: 'book:')]
 class BookController extends AbstractController
 {
-    #[Route('s', name : 'index', methods : ["HEAD", "GET", "POST"])]
+    #[Route('s', name: 'index', methods: ["HEAD", "GET", "POST"])]
     public function index(BookRepository $bookRepository): Response
     {
 
@@ -61,7 +61,7 @@ class BookController extends AbstractController
             'form' => $form
         ]);
     }
-    #[Route('/{id}', name: 'read' , methods : ["HEAD", "GET"])]
+    #[Route('/{id}', name: 'read', methods: ["HEAD", "GET"])]
     public function read(Book $book): Response
     {
 
@@ -69,10 +69,10 @@ class BookController extends AbstractController
             'book' => $book
         ]);
     }
-    #[Route('/{id}/edit', name: 'update', methods : ["HEAD", "GET", "POST"])]
+    #[Route('/{id}/edit', name: 'update', methods: ["HEAD", "GET", "POST"])]
     public function update(Book $book, Request $request, BookRepository $bookRepository): Response
     {
-                //Build the form sur l'architecture de Booktype(form) 
+        //Build the form sur l'architecture de Booktype(form) 
         // et selon obj $book
 
         $form = $this->createForm(BookType::class, $book);
@@ -83,7 +83,6 @@ class BookController extends AbstractController
         // form treatment + form validator + saving data
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $bookRepository->save($book, true);
 
             return $this->redirectToRoute('book:read', [

@@ -27,10 +27,10 @@ class Book
     #[ORM\Column(name: "cover", type: Types::STRING, length: 40, nullable: true)]
     private ?string $cover = null;
 
-    #[ORM\Column(name: "date_create", type: Types::DATE_IMMUTABLE, nullable: false)]
+    #[ORM\Column(name: "date_create", type: Types::DATETIME_IMMUTABLE, nullable: false)]
     private ?\DateTimeImmutable $createAt = null;
 
-    #[ORM\Column(name: "date_update", type: Types::DATE_MUTABLE, nullable: true)]
+    #[ORM\Column(name: "date_update", type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updateAt = null;
 
     #[ORM\Column(name: "is_published", type: Types::BOOLEAN, nullable: false)]

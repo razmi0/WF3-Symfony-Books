@@ -3,42 +3,42 @@
 {# Pourquoi pas component => car lié à l'entité book et au vues book  #}
 
 
-
-				{{form_start(form, {
+{{form_start(form, {
         'attr': {
             'novalidate': 'novalidate'
         }
     })}}
 
-    {# TOKEN CSRF #}
-    {{ form_widget(form._token) }}
+{# TOKEN CSRF #}
+{{ form_widget(form._token) }}
 
-				{# Title #}
-				<div class="form-group">
-					{{ form_label(form.title) }}
-					{{ form_widget(form.title) }}
-					{{ form_help(form.title) }}
-					{{ form_errors(form.title) }}
-				</div>
+{# Title #}
+	<div class="form-group"> {{ form_label(form.title) }}
+	{{ form_widget(form.title) }}
+	{{ form_help(form.title) }}
+	{{ form_errors(form.title) }}
+</div>
 
-				{# Description #}
-				<div class="form-group">
-					{{ form_label(form.description) }}
-					{{ form_widget(form.description) }}
-					{{ form_help(form.description) }}
-					{{ form_errors(form.description) }}
-				</div>
+{# Description #}
+<div class="form-group">
+	{{ form_label(form.description) }}
+	{{ form_widget(form.description) }}
+	{{ form_help(form.description) }}
+	{{ form_errors(form.description) }}
+</div>
 
-				{# Cover #}
-				<div class="form-group">
-					{{ form_label(form.cover) }}
-					{{ form_widget(form.cover) }}
-					{{ form_help(form.cover) }}
-					{{ form_errors(form.cover) }}
-				</div>
-				<button class="btn btn-sm btn-outline-warning m-3" type="submit">{{btn_label | default("Create")}} the new book</button>
-				<button class="btn btn-sm btn-outline-danger m-3 " type="reset">Reset the new book</button>
+{# Cover #}
+<div class="form-group">
+	{{ form_label(form.cover) }}
+	{{ form_widget(form.cover) }}
+	{{ form_help(form.cover) }}
+	{{ form_errors(form.cover) }}
+</div>
+<button class="btn btn-sm btn-outline-warning m-3" type="submit">{{btn_label | default("Create")}}
+	the new book</button>
 
-				{{form_end(form, {
+<button class="btn btn-sm btn-outline-danger m-3 " type="reset">Reset the new book</button>
+
+{{form_end(form, {
         'render_rest' : false
     })}}

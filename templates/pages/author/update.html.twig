@@ -1,0 +1,44 @@
+{% extends 'layout/base.html.twig' %}
+
+{# SETTINGS PAGE #}
+{% set page_title = "Author Update" %}
+
+
+{% block title %}
+	{{page_title}}
+	|
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<style>
+		.no-bullets {
+			list-style-type: none;
+		}
+	</style>
+
+
+	<header class="page-header">
+		<h2 class="page-title text-center">{{page_title}}</h2>
+	</header>
+	<main class="page-content">
+		<h4 class="text-center mb-5">---- Edit this author ----</h4>
+		{# formulaire de modification #}
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+
+				{% include ("pages/author/_form.html.twig") with {
+                    form : form,
+                    btn_label: "Update",
+                } only %}
+
+
+			</div>
+		</div>
+	</main>
+	<footer class="page-footer">
+		<a href="{{url('author:create')}}" class="btn btn-link btn-sm">Add a author</a>
+		<a href="{{ url('author:index') }}" class="btn btn-link btn-sm">Back to authors list</a>
+	</footer>
+
+{% endblock %}

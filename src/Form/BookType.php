@@ -8,19 +8,115 @@ namespace App\Form;
 use App\Entity\Book;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class BookType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $descriptionMaxLength = 10;
         $builder
-            ->add('title')
-            ->add('description')
-            ->add('cover')
-            // ->add('createAt')
-            // ->add('updateAt')
-            // ->add('isPublished')
+        // Configuration du formulaire
+
+            ->add('title', TextType::class, [
+                'label' => 'Titre du livre',
+                'required' => true,
+                'attr' => [
+                    'placeholder' => 'Titre du livre'
+                ],
+                'empty_data' => '',
+                'help' => 'Le titre est obligatoire',
+                'help_attr' => [
+                    'class' => 'text-light mb-4'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Le titre est obligatoire'
+                    ])
+                ]
+
+            ])
+            // Description
+            ->add('description', TextareaType::class, [
+
+                // Label options
+                'label' => "Description du livre",
+                // 'label_attr' => [
+                //     'class' => "my-awesome-style",
+                // ],
+
+                // Make it required
+                'required' => false,
+                
+                // Field attributes
+                'attr' => [
+                    // 'class' => "my-awesome-style",
+                    'placeholder' => "Saisir la description du livre",
+                    'maxLength' => $descriptionMaxLength
+                ],
+
+                // Field helper
+                'help' => "Saisir une description de $descriptionMaxLength caractères max",
+                'help_attr' => [
+                    // 'class' => "my-awesome-style"
+                ],
+
+                // Form constraints
+                'constraints' => [
+                    new Length(
+                        max: $descriptionMaxLength,
+                        maxMessage: "La description est trop long... {{ limit }} max !"
+                    )
+                ]
+            ])
+
+            // Cover
+            ->add('cover', FileType::class, [
+
+                // Label options
+                'label' => "Couverture du livre",
+                // 'label_attr' => [
+                //     'class' => "my-awesome-style",
+                // ],
+
+                'mapped' => false,
+
+                // Make it required
+                'required' => false,
+                
+                // Field attributes
+                'attr' => [
+                    // 'class' => "my-awesome-style",
+                    'accept' => "image/*"
+                ],
+
+                // Field helper
+                'help' => "Choisir une image pour la couverture du livre",
+                'help_attr' => [
+                    // 'class' => "my-awesome-style"
+                ],
+
+                // Form constraints
+                'constraints' => [
+                    new File([
+                        'maxSize' => "1024k",
+                        'maxSizeMessage' => "Le fichier est trop lourd. ({{ limit }} max)",
+                        'mimeTypes' => [
+                            "image/gif",
+                            "image/jpeg",
+                            "image/png",
+                        ],
+                        'mimeTypesMessage' => "Le format de fichier n'est pas autorisé"
+                    ])
+                ]
+            ])
+
         ;
     }
 

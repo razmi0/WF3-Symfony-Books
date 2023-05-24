@@ -1,0 +1,37 @@
+{# underscore => element partiel  #}
+{# sans underscore => element complet #}
+{# Pourquoi pas component => car lié à l'entité book et au vues book  #}
+
+
+{{form_start(form, {
+        'attr': {
+            'novalidate': 'novalidate'
+        }
+    })}}
+
+{# TOKEN CSRF #}
+{{ form_widget(form._token) }}
+
+{# Firstname #}
+	<div class="form-group"> {{ form_label(form.firstname) }}
+	{{ form_widget(form.firstname) }}
+	{{ form_help(form.firstname) }}
+	{{ form_errors(form.firstname) }}
+</div>
+
+{# Lastname #}
+<div class="form-group">
+	{{ form_label(form.lastname) }}
+	{{ form_widget(form.lastname) }}
+	{{ form_help(form.lastname) }}
+	{{ form_errors(form.lastname) }}
+</div>
+
+<button class="btn btn-sm btn-outline-warning m-3" type="submit">{{btn_label | default("Create")}}
+	new author</button>
+
+<button class="btn btn-sm btn-outline-danger m-3 " type="reset">Reset the new author</button>
+
+{{form_end(form, {
+        'render_rest' : false
+    })}}
